@@ -11,15 +11,17 @@ class CountdownTimer {
     this.targetDate = targetDate;
   }
   start() {
-    const startTime = this.targetDate;
-
+    this.showTime();
     setInterval(() => {
-      const currentTime = Date.now();
-      const restTime = startTime - currentTime;
-      const time = this.getTimeComponents(restTime);
-
-      this.onTick(time);
+      this.showTime();
     }, 1000);
+  }
+  showTime() {
+    const startTime = this.targetDate;
+    const currentTime = Date.now();
+    const restTime = startTime - currentTime;
+    let time = this.getTimeComponents(restTime);
+    this.onTick(time);
   }
   getTimeComponents(time) {
     const days = this.pad(Math.floor(time / (1000 * 60 * 60 * 24)));
